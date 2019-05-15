@@ -1,4 +1,4 @@
-// Because classes are not hoisted you will need to start your code at the bottom of the page.  Look for the comment "START HERE"
+/* // Because classes are not hoisted you will need to start your code at the bottom of the page.  Look for the comment "START HERE"
 
 class Article {
   constructor(domElement) {
@@ -26,5 +26,93 @@ class Article {
 
 */
 
-let articles = document.querySelectorAll('.article');
-articles.forEach((article) => new Article(article));
+/* let articles = document.querySelectorAll('.article');
+articles.forEach((article) => new Article(article)); */ 
+
+// Create articles only with Javascript
+const articles = document.querySelectorAll('.articles .article');
+
+const articleData = [
+  {
+    heading: 'Lambda School Students: Were the best!',
+    paragraph1: 'Nov 5th, 2017',
+    paragraph2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    paragraph3: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    paragraph4: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    paragraph5: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    heading: 'Javascript and You, ES6',
+    paragraph1: 'Nov 7th, 2017',
+    paragraph2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    paragraph3: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    paragraph4: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    paragraph5: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    heading: 'React vs Angular vs Vue',
+    paragraph1: 'Nov 7th, 2017',
+    paragraph2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    paragraph3: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    paragraph4: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    paragraph5: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+];
+
+class ArticleGenerator {
+  constructor(article, data) {
+    this.article = article;
+    this.data = data;
+    
+    this.createHeading();
+    this.createParagraphs();
+    this.createSpan();
+    this.expandButton = article.querySelector('.expandButton');
+    this.expandButton.addEventListener('click', () => this.expandArticle());
+  }
+
+  createHeading() {
+    // this.someSillyTHingIwantTOattach = 7; // NO!!!!!!!!!!!!!!!!!!!
+    const heading = document.createElement('h2');
+    heading.textContent = this.data.heading;
+    this.article.append(heading);
+  }
+
+  createParagraphs() {
+    const para1 = document.createElement('p');
+    para1.textContent = this.data.paragraph1;
+    para1.classList = "date";
+    this.article.insertAdjacentElement('beforeend', para1);
+
+    const para2 = document.createElement('p');
+    para2.textContent = this.data.paragraph2;
+    this.article.insertAdjacentElement('beforeend', para2);
+
+    const para3 = document.createElement('p');
+    para3.textContent = this.data.paragraph3;
+    this.article.insertAdjacentElement('beforeend', para3);
+
+    const para4 = document.createElement('p');
+    para4.textContent = this.data.paragraph4;
+    this.article.insertAdjacentElement('beforeend', para4);
+
+    const para5 = document.createElement('p');
+    para5.textContent = this.data.paragraph5;
+    this.article.insertAdjacentElement('beforeend', para5);
+  }
+  createSpan() {
+    const span = document.createElement('span');
+    span.classList = 'expandButton';
+    span.textContent = "expand";
+    this.article.insertAdjacentElement('beforeend', span);
+  }
+  expandArticle() {
+    // Using our reference to the domElement, toggle a class to expand or hide the article.
+    this.article.classList.toggle('article-open');
+  }
+}
+
+articles.forEach((article, idx) => {
+  new ArticleGenerator(article, articleData[idx]);
+  
+})
