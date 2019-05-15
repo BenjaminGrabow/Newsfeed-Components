@@ -100,58 +100,57 @@ const articleData = [
 ];
 
 class ArticleGenerator {
-  constructor(article, data) {
-    this.article = article;
+  constructor(horst, data) {
+    this.horst = horst;
     this.data = data;
     
     this.createHeading();
     this.createParagraphs();
     this.createSpan();
-    this.expandButton = article.querySelector('.expandButton');
+    this.expandButton = horst.querySelector('.expandButton');
     this.expandButton.addEventListener('click', () => this.expandArticle());
   }
 
   createHeading() {
-    // this.someSillyTHingIwantTOattach = 7; // NO!!!!!!!!!!!!!!!!!!!
     const heading = document.createElement('h2');
     heading.textContent = this.data.heading;
-    this.article.append(heading);
+    this.horst.append(heading);
   }
 
   createParagraphs() {
     const para1 = document.createElement('p');
     para1.textContent = this.data.paragraph1;
     para1.classList = "date";
-    this.article.insertAdjacentElement('beforeend', para1);
+    this.horst.insertAdjacentElement('beforeend', para1);
 
     const para2 = document.createElement('p');
     para2.textContent = this.data.paragraph2;
-    this.article.insertAdjacentElement('beforeend', para2);
+    this.horst.insertAdjacentElement('beforeend', para2);
 
     const para3 = document.createElement('p');
     para3.textContent = this.data.paragraph3;
-    this.article.insertAdjacentElement('beforeend', para3);
+    this.horst.insertAdjacentElement('beforeend', para3);
 
     const para4 = document.createElement('p');
     para4.textContent = this.data.paragraph4;
-    this.article.insertAdjacentElement('beforeend', para4);
+    this.horst.insertAdjacentElement('beforeend', para4);
 
     const para5 = document.createElement('p');
     para5.textContent = this.data.paragraph5;
-    this.article.insertAdjacentElement('beforeend', para5);
+    this.horst.insertAdjacentElement('beforeend', para5);
   }
   createSpan() {
     const span = document.createElement('span');
     span.classList = 'expandButton';
     span.textContent = "expand";
-    this.article.insertAdjacentElement('beforeend', span);
+    this.horst.insertAdjacentElement('beforeend', span);
   }
   expandArticle() {
     // Using our reference to the domElement, toggle a class to expand or hide the article.
-    this.article.classList.toggle('article-open');
+    this.horst.classList.toggle('article-open');
   }
 }
 
-articles.forEach((article, idx) => {
-  new ArticleGenerator(article, articleData[idx]);
-})
+articles.forEach((article1, idx) => {
+  new ArticleGenerator(article1, articleData[idx]);
+});
